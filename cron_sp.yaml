@@ -1,0 +1,49 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"batch/v1beta1","kind":"CronJob","metadata":{"annotations":{},"name":"upload-data-sp-cron","namespace":"dev-env"},"spec":{"jobTemplate":{"spec":{"template":{"spec":{"containers":[{"image":"mobup.azurecr.io/upload-data-sp:1.0.0","imagePullPolicy":"Always","name":"upload-data-mg-cron","resources":{"limits":{"cpu":2,"memory":"4Gi"}}}],"restartPolicy":"OnFailure"}}}},"schedule":"2 */1 * * *"}}
+  creationTimestamp: "2022-01-19T20:00:24Z"
+  name: upload-data-sp-cron
+  namespace: dev-env
+  resourceVersion: "169299950"
+  selfLink: /apis/batch/v1beta1/namespaces/dev-env/cronjobs/upload-data-sp-cron
+  uid: 5b382c20-bfcb-4c4d-9638-16a3cce6a8c6
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - image: mobup.azurecr.io/upload-data-sp:1.0.0
+            imagePullPolicy: Always
+            name: upload-data-sp-cron
+            resources:
+              requests:
+                memory: 5Gi
+              limits:
+                cpu: "1"
+                memory: 8Gi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+  schedule: 43 */1 * * *
+  successfulJobsHistoryLimit: 3
+  suspend: false
+status:
+  lastScheduleTime: "2022-01-19T20:02:00Z"
